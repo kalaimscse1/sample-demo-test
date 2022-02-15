@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<script>
+// Defining a function to display error message
+function printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+}
+function clearForm(){
+    document.contactForm.name.value ="";
+    document.contactForm.email.value="";
+    document.contactForm.mobile.value="";
+    document.contactForm.dateofbirth.value="";
+};
+// Defining a function to validate form 
+function validateForm() {
+    // Retrieving the values of form elements 
+    var name = document.contactForm.name.value;
+    var email = document.contactForm.email.value;
+    var mobile = document.contactForm.mobile.value;
+    var dob = document.contactForm.dateofbirth.value;
+
+	// Defining error variables with a default value
+    var nameErr = emailErr = mobileErr = dateError = true;
+    
+    // Validate name
+    if(name == "") {
+        printError("nameErr", "Please enter your name");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;                
+        if(regex.test(name) === false) {
+            printError("nameErr", "Please enter a valid name");
+        } else {
+            printError("nameErr", "");
+            nameErr = false;
+        }
+    }
+    
+    // Validate email address
+    if(email == "") {
+        printError("emailErr", "Please enter your email address");
+    } else {
+        // Regular expression for basic email validation
+        var regex = /^\S+@\S+\.\S+$/;
+        if(regex.test(email) === false) {
+            printError("emailErr", "Please enter a valid email address");
+        } else{
+            printError("emailErr", "");
+            emailErr = false;
+        }
+    }
+    
+    // Validate mobile number
+    if(mobile == "") {
+        printError("mobileErr", "Please enter your mobile number");
+    } else {
+        var regex = /^[1-9]\d{9}$/;
+        if(regex.test(mobile) === false) {
+            printError("mobileErr", "Please enter a valid 10 digit mobile number");
+        } else{
+            printError("mobileErr", "");
+            mobileErr = false;
+        }
+    }
+    
+    // Validate Date Of Birth
+    if(dob == "") {
+        printError("dateError", "Please select Date Of Birth");
+    } else {
+        printError("dateError", "");
+        dateError = false;
+    }
+    
+    // Prevent the form from being submitted if there are any errors
+    if((nameErr || emailErr || mobileErr || dateError) == true) {
+       return false;
+    } else {
+      
+      printError("sbm","Name  :" + name +"<br>"
+      +"Email :" + email + "<br> Mobile :"+mobile +"<br> Date of Birth :" + dob +"<br>");
+      return false;
+    }
+};
+</script>
+</head>
+<body>
+<form name="contactForm" onsubmit="return validateForm()">
+
+    <div class="row">
+        <input type="text" name="name" placeholder="Enter Name">
+        <div class="error" id="nameErr"></div>
+    </div>
+    <div class="row">
+        <input type="text" name="email" placeholder="Enter Email">
+        <div class="error" id="emailErr"></div>
+    </div>
+    <div class="row">
+        <input type="text" name="mobile" maxlength="10" placeholder="Enter Mobile">
+        <div class="error" id="mobileErr"></div>
+    </div>
+    <div class="row">
+        <input type="date" placeholder="Date Of Birth" name="dateofbirth" id="date">
+        <div class="error" id="dateError"></div>
+    </div>
+    <div class="row">
+        <input type="submit" value="Submit" class="registerbtn" name="register">
+        <input type="button" value="Clear" class="registerbtn" name="clear" onclick="return clearForm()">
+    </div>
+    <div id="row">
+        <div class ="error" id="sbm" ></div>
+    </div>
+</form>
+</body>
+</html>

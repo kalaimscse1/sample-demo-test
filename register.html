@@ -1,0 +1,71 @@
+<html>
+ <head>
+ <script type="text/javascript">
+function validateForm()
+{
+var x=document.forms["registerForm"]["email"].value
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if (x.match(mailformat))
+  {
+    x.desc().focus();
+    return true;
+  }
+  else
+  {
+    document.getElementById("emailError").style.display = 'block';
+    alert("You have entered an invalid email address!");
+    event.preventDefault()
+    x.focus();
+    return false;
+  }
+};
+function allLetter(uname)
+{ 
+var letters = /^[A-Za-z]+$/;
+if(uname.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('Please input alphabet characters only');
+uname.focus();
+return false;
+}
+}
+</script>
+ <link rel="stylesheet" type="text/css" href="style.css">
+
+ </head>
+<body onload="document.registerForm.userid.focus();">
+<form name = "registerForm" onsubmit = "return validateform()"  method="post">
+  <div class="container">
+    <h1 class="h1">Register</h1>
+    <p class= "h1">Please fill in this form to create an account.</p>
+
+    <input type="text" placeholder="Enter Name" name="name" id="name" required><br>
+    <div id="nameError" style="display: none;">Not valid Name</div>
+
+    <input type="text" placeholder="Enter Email" name="email" id="email" required><br>
+    <div id="emailError" style="display: none;"class ="h1">Not valid email</div>
+
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required><br>
+    <div id="passError" style="display: none;">password should be 8 to 13 characters</div>
+
+    <input type="date" placeholder="Date Of Birth" name="dateofbirth" id="date" required><br>
+
+    <input type="text" placeholder="Enter Gender" name="gender" id="gender" required><br>
+
+    <input type="number" placeholder="Enter Mobile Number" name="mobile" id="mobile" required><br>
+    <div id="mobileError" style="display: none;">Not valid email</div>
+
+    <p class="h1">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <input type="submit" class="registerbtn" name="register" value = "Register" name="register">
+  </div>
+
+  <div class="container signin">
+    <p>Already have an account? <a href="index.php">Sign in</a>.</p>
+  </div>
+</form>
+</body>
+</html>
