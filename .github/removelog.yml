@@ -1,0 +1,15 @@
+name: remove log
+on:
+  push:
+    branches:
+      - main
+jobs:
+   remove-log:
+    runs-on: ubuntu-latest
+    steps:
+        name: remove - logs
+        run: .github/removelogs.sh
+env:
+  GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+
+
